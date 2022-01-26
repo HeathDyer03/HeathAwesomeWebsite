@@ -1,0 +1,68 @@
+* {
+	cursor: url('images/cursor.png'), auto;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: white;
+    color: white;
+}
+
+#contentdiv {
+    margin: auto;
+    width: 45%;
+    outline: black solid 2px;
+    background-color: WhiteSmoke;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    text-align: center;
+    font-family: arial;
+}
+
+.div1 {
+    display: inline-block;
+}
+
+.div2 {
+    display: inline-block;
+}
+
+#adaptable {
+    max-width: 100%;
+    height: auto;
+}
+
+body {
+	background-image: url('images/heath1.png');
+	background-repeat: yes-repeat;
+	background-size: 3%;
+	text-align: center;
+	background-attachment: fixed;
+	background-position: center;
+	font-family: "Arial";
+}
+
+.text-div {
+    background-color: #93D8E8;
+    border: 3px solid black;
+    display: inline-block;
+}
+
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1 {
+	font-family: arial;
+	background-color: CornflowerBlue;
+	text-align:center;
+	font-size:50px;
+}
+p {
+	font-family: arial;
+	font-size:20px;
+}
