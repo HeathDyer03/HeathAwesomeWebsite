@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16"/>
+    <link rel="stylesheet" type="text/css" href="global.css">
+    <link rel="stylesheet" type="text/css" href="clicker.css">
+
+    <head>
+        <title>Heathshizzle</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+
+        <h1> HEATHSHIZZLE'S AWESOME WEBSITE </h1>
+
+        <!--
+            Navigation buttons
+        -->
+        <div class="div1">
+            <a href="index.html"> <img src="images/home.png" style="width: 15%;height:auto;"> </a>
+            <a href="clicker.html"> <img src="images/clicker.png" style="width: 15%;height:auto;"> </a>
+            <br></br>
+        </div>
+
+        <!--
+            Clicker hitbox
+        -->
+        <div class="clickerContainer">
+            <img src = "images/heathcoin.png" style="width: 25%;height:auto;" onclick ="game.addToScore(game.clickValue)"> </img>
+        </div>
+        <br></br>
+
+
+        <!--
+        Display information box
+        -->
+        <div id="contentdiv">
+            <p><span id = "score">0</span> Heathcoin</p>
+            <p><span id = "scorepersecond">0</span> Heathcoin per Second</p>
+            <p>Net Worth: $<span id="networth">0.00</span> USD</p>
+            <button onclick="saveGame()">Save Game</button>
+            <button onclick="resetGame()">Reset Game</button>
+        </div>
+        <br></br>
+
+        <!--
+        Item Shop
+        -->
+        <div id="shopContainer">
+
+        </div>
+
+        <br> </br>
+
+
+        <!--
+        Upgrade Shop
+        -->
+        <div id="contentdiv">
+            <h2>Upgrades</h2>
+
+            <table class="shopButton" onclick="buyClickerUpgrade()"> <!-- Upgrade clicker -->
+                <tr>
+                    <td id="image"> <img src = "images/cursor.png" height="50px" width="50px"> </img> </td>
+                    <td id="nameAndCost">
+                        <p>Upgrade Clicker</p>
+                        <p><span id = "clickerCost">10</span> Heathcoin</p>
+                    </td>
+                    <td id="amount"><span id="clickerCount">0</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <embed src="sound/happy.mp3" autostart loop width="2" height="2">
+    </body>
+
+    <script>
+
+        var game = {
+            score: 0,
+            totalScore: 0,
+            totalClicks: 0,
+            clickValue: 1,
+            version: 0.000,
+
+            addToScore: function(amount) {
+                this.score += amount;
+                this.totalScore += amount;
+                display.updateScore();
+            },
+
+            getScorePerSecond: function() {
+                var scorePerSecond = 0;
+                for (i = 0; i < building.name.length, ++i) {
+                    scorePerSecond += building.income[i] * building.count[i];
+                }
+                return scorePerSecond;
+            }
+        };
+
+        var building = {
+            name: [
+                "Banjo",
+                "Minion Effigy",
+                "Nick dog"
+            ],
+            image: [
+                "shop1.png",
+                "shop2.png",
+                "shop3.png"
+            ],
+            count: [
+                0,
+                0,
+                0
+            ],
+            income: [
+                1,
+                1,
+                1
+            ],
+            cost: [
+                1,
+                1,
+                1
+            ],
+
+            purchase: function(index) {
+                if (game.score >= this.cost[index]) {
+                    game.score -= this.cost[index];
+                    this.count[index]++;
+                    this.cost[index] = Math.ceil(this.cost[index] * 1.10);
+                    display.updateScore();
+                    display.updateShop();
+                }
+            }
+        };
+
+        var display = {
+            updateScore: function() {
+                document.getElementById("score").innerHTML = game.score;
+                document.getElementsById("scorepersecond").innerHTML = game.getScorePerSecond();
+            },
+
+            updateShop: function() {
+                document.getElementById("shopContainer").innerHTML = "";
+                for (i = 0; i < building.name.length; ++i) {
+                    document.getElementById("shopContainer").innerHTML += '<table class="shopButton" onclick="building.purchase('+i+')"> <tr> <td id="image"> <img src = "images/'+building.image[i]+'" height="50px" width="50px"> </img> </td> <td id="nameAndCost"> <p>'+building.name[i]+'</p> <p><span>'+building.cost[i]+'</span> Heathcoin</p> </td> <td id="amount"><span id='+building.count[i]+'>0</span></td> </tr> </table>';
+                }
+            }
+        };
+
+        window.onload = function() {
+            display.updateScore();
+            display.updateShop();
+        }
+
+    </script>
+
+</html>

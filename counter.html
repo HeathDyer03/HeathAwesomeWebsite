@@ -14,6 +14,7 @@
 		<div class="div1">
 			<a href="index.html"> <img src="images/home.png" style="width: 15%;height:auto;"> </a>
 			<a href="clicker.html"> <img src="images/clicker.png" style="width: 15%;height:auto;"> </a>
+			<button href="counter.html">Counter</button>
 			<br></br>
 		</div>
 
@@ -22,14 +23,40 @@
         </div>
 
 		<div id="contentdiv">
-			<h2> COMING SOON </h2>
-			<p>Heathshizzle home page test test test filler text filler text
-			filler text filler text filler text filler text filler text filler text
-			filler text filler text filler text filler text filler text filler text
-			filler textfiller text filler text filler text filler text filler text</p>
-			<img src = "images/heath5.png" style="width:70%;height:70%;"> </img>
+			<h2> COUNTER </h2>
+			<p>Total: <span id="counter">0</span>
+            <button onclick="add()">Increment</button>
 		</div>
 
 		<embed src="sound/happy.mp3" autostart loop width="2" height="2">
+
+        <?php
+            $myfile = fopen("data/counter.txt", "r") or die("Unable to open file!");
+            $fileNumber fgets($myfile);
+            fclose($myfile);
+            ?>
 	</body>
+
+    <script>
+        var count = 0;
+
+        function add() {
+            count++;
+            document.getElementById("counter").innerHTML = count;
+        }
+
+
+    }
+
+    window.onload = function() {
+
+    }
+
+    setInterval(function() {
+
+    }, 1000);
+
+
+
+    </script>
 </html>

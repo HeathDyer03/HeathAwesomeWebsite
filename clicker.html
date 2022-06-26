@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16"/>
+    <link rel="stylesheet" type="text/css" href="global.css">
+    <link rel="stylesheet" type="text/css" href="clicker.css">
+
+    <head>
+        <title>Heathshizzle</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+
+        <h1> HEATHSHIZZLE'S AWESOME WEBSITE </h1>
+
+        <!--
+            Navigation buttons
+        -->
+        <div class="div1 unselectable">
+            <a href="index.html"> <img src="images/home.png" style="width: 15%;height:auto;"> </a>
+            <a href="clicker.html"> <img src="images/clicker.png" style="width: 15%;height:auto;"> </a>
+            <br></br>
+        </div>
+
+        <!--
+            Clicker hitbox
+        -->
+        <div class="unselectable sectionClicker" id="clicker" onclick ="clicker()">
+        </div>
+        <br></br>
+
+
+        <!--
+        Display information box
+        -->
+        <div id="contentdiv">
+            <p><span id = "balance">0</span> Heathcoin</p>
+            <p><span id = "mps">0</span> Heathcoin per Second</p>
+            <p>Net Worth: $<span id="networth">0.00</span> USD</p>
+            <button onclick="saveGame()">Save Game</button>
+            <button onclick="resetGame()">Reset Game</button>
+        </div>
+        <br></br>
+
+        <!--
+        Item Shop
+        -->
+        <div id="contentdiv">
+            <h2>Shop</h2>
+            <table class="shopButton" onclick="buyShop1()"> <!-- Item 1, banjo-->
+                <tr>
+                    <td id="image"> <img src = "images/shop1.png" height="50px" width="50px"> </img> </td>
+                    <td id="nameAndCost">
+                        <p>Banjo</p>
+                        <p><span id = "shop1Cost">15</span> Heathcoin</p>
+                    </td>
+                    <td id="amount"><span id="shop1Count">0</span></td>
+                </tr>
+            </table>
+
+            <table class="shopButton" onclick="buyShop2()"> <!-- Item 2, minion effigy -->
+                <tr>
+                    <td id="image"> <img src = "images/shop2.png" height="50px" width="50px"> </img> </td>
+                    <td id="nameAndCost">
+                        <p>Minion Effigy</p>
+                        <p><span id = "shop2Cost">100</span> Heathcoin</p>
+                    </td>
+                    <td id="amount"><span id="shop2Count">0</span></td>
+                </tr>
+            </table>
+
+            <table class="shopButton" onclick="buyShop3()"> <!-- Item 3, Nick dog -->
+                <tr>
+                    <td id="image"> <img src = "images/shop3.png" height="50px" width="50px"> </img> </td>
+                    <td id="nameAndCost">
+                        <p>Nick Dog</p>
+                        <p><span id = "shop3Cost">1000</span> Heathcoin</p>
+                    </td>
+                    <td id="amount"><span id="shop3Count">0</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <br> </br>
+
+
+        <!--
+        Upgrade Shop
+        -->
+        <div id="contentdiv">
+            <h2>Upgrades</h2>
+
+            <table class="shopButton" onclick="buyClickerUpgrade()"> <!-- Upgrade clicker -->
+                <tr>
+                    <td id="image"> <img src = "images/cursor.png" height="50px" width="50px"> </img> </td>
+                    <td id="nameAndCost">
+                        <p>Upgrade Clicker</p>
+                        <p><span id = "clickerCost">10</span> Heathcoin</p>
+                    </td>
+                    <td id="amount"><span id="clickerCount">0</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <embed src="sound/happy.mp3" autostart loop width="2" height="2">
+    </body>
+
+    <script>
+        var balance = 0;
+        var mps = 0;
+        var networth = 0;
+        var moneySpent = 0;
+        var heathcoinValue = 0.0000005;
+
+        //first item in shop, banjo
+        var shop1Cost = 10;
+        var shop1Count = 0;
+        var shop1Value = 1;
+
+        //second item in shop, minion effigy
+        var shop2Cost = 100;
+        var shop2Count = 0;
+        var shop2Value = 5;
+
+        //third item in shop, nick dog
+        var shop3Cost = 1000;
+        var shop3Count = 0;
+        var shop3Value = 25;
+
+        //fourth item in shop, lego gonk droid
+        var shop4Cost = 1000;
+        var shop4Count = 0;
+        var shop4Value = 25;
+
+        //clicker upgrade
+        var clickerCost = 10;
+        var clickerCount = 0;
+        var clickerValue = 1;
+
+        function clicker() {
+            increment(clickerValue);
+        }
+
+
+        function increment(amount) {
+            balance += amount;
+            document.getElementById("balance").innerHTML = balance;
+        }
+
+        function buyShop1() {
+            if (balance >= shop1Cost) {
+                balance -= shop1Cost;
+                moneySpent += shop1Cost;
+                shop1Count++;
+                shop1Cost = Math.round(shop1Cost * 1.15);
+                calculate();
+
+                document.getElementById("balance").innerHTML = balance;
+                document.getElementById("shop1Cost").innerHTML = shop1Cost;
+                document.getElementById("shop1Count").innerHTML = shop1Count;
+
+            }
+        }
+
+        function buyShop2() {
+            if (balance >= shop2Cost) {
+                balance -= shop2Cost;
+                moneySpent += shop2Cost;
+                shop2Count++;
+                shop2Cost = Math.round(shop2Cost * 1.25);
+                calculate();
+
+                document.getElementById("balance").innerHTML = balance;
+                document.getElementById("shop2Cost").innerHTML = shop2Cost;
+                document.getElementById("shop2Count").innerHTML = shop2Count;
+
+            }
+        }
+
+        function buyShop3() {
+            if (balance >= shop3Cost) {
+                balance -= shop3Cost;
+                moneySpent += shop3Cost;
+                shop3Count++;
+                shop3Cost = Math.round(shop3Cost * 1.35);
+                calculate();
+
+                document.getElementById("balance").innerHTML = balance;
+                document.getElementById("shop3Cost").innerHTML = shop3Cost;
+                document.getElementById("shop3Count").innerHTML = shop3Count;
+
+            }
+        }
+
+        function buyClickerUpgrade() {
+            if (balance >= clickerCost) {
+                balance -= clickerCost;
+                moneySpent += clickerCost;
+                clickerCount++;
+                clickerCost = Math.round(clickerCost * 1.15);
+                clickerValue = clickerCount + 1;
+
+                document.getElementById("balance").innerHTML = balance;
+                document.getElementById("clickerCost").innerHTML = clickerCost;
+                document.getElementById("clickerCount").innerHTML = clickerCount;
+
+            }
+        }
+
+        function calculate() {
+            mps = (shop1Count * shop1Value) + (shop2Count * shop2Value) + (shop3Count * shop3Value);
+            networth = moneySpent + balance + mps;
+            document.getElementById("mps").innerHTML = mps;
+            document.getElementById("networth").innerHTML = (networth * heathcoinValue).toFixed(2);
+        }
+
+        function fadeOut(element, duration, finalOpacity, callback) {
+            opacity = 1;
+
+            let elementFadingInterval = window.setInterval(function() {
+                opacity -= 50/duration
+
+                if (opacity <= finalOpacity) {
+                    clearInterval(elementFadingInterval);
+                    callback();
+                }
+
+                element.style.opacity = opacity;
+            }, 50);
+        }
+
+        function createNumberOnClicker(event) {
+            let clicker = document.getElementById("clicker");
+
+            let clickerOffset = clicker.getBoundingClientRect();
+            let position = {
+                x: event.pageX - clickerOffset.left,
+                y: event.pageY - clickerOffset.top
+            };
+
+            let element = document.createElement("div");
+            element.textContent = "+" + clickerValue;
+            element.classList.add("number", "unselectable");
+            element.style.left = position.x + "px";
+            element.style.top = position.y + "px";
+
+            clicker.appendChild(element);
+
+            let movementInterval = window.setInterval(function() {
+                if (typeof element == "undefined" && element == null) clearInterval(movementInterval);
+
+                position.y--;
+                element.style.top = position.y + "px";
+            }, 10);
+
+            fadeOut(element, 3000, 0.5, function() {
+
+            });
+        }
+
+        document.getElementById("clicker").addEventListener("click", function(event) {
+            createNumberOnClicker(event);
+        }, false);
+
+
+        function loadGame() { //do for each variable
+            var savedGame = JSON.parse(localStorage.getItem("gameSave"));
+            if (typeof savedGame.balance !== "undefined") balance = savedGame.balance;
+        }
+
+        function saveGame() { //do for each variable
+            var gameSave = {
+                balance: balance,
+            };
+            localStorage.setItem("gameSave", JSON.stringify(gameSave));
+        }
+
+        window.onload = function() {
+            loadGame();
+            document.getElementById("balance").innerHTML = balance;
+        }
+
+        function resetGame() {
+            if (confirm("Reset game? You will loose all your progress :(")) {
+                var gameSave = {};
+                localStorage.setItem("gameSave", JSON.stringify(gameSave));
+                location.reload();
+            }
+        }
+
+        setInterval(function() {
+            balance += mps;
+            networth = moneySpent + balance + mps;
+            document.getElementById("balance").innerHTML = balance;
+            document.getElementById("networth").innerHTML = (networth * heathcoinValue).toFixed(2);
+
+        }, 1000); //1000ms = 1 sec
+
+        setInterval(function() {
+            saveGame();
+        }, 30000); // 30000ms = 30 sec
+
+    </script>
+
+</html>
